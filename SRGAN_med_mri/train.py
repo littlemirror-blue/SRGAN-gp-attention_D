@@ -19,7 +19,7 @@ parser = argparse.ArgumentParser(description='Train Super Resolution Models with
 parser.add_argument('--crop_size', default=96, type=int, help='training images crop size (HR)')
 parser.add_argument('--upscale_factor', default=2, type=int, choices=[2, 4, 8],
                     help='super resolution upscale factor')
-parser.add_argument('--num_epochs', default=10, type=int, help='train epoch number')
+parser.add_argument('--num_epochs', default=100, type=int, help='train epoch number')
 parser.add_argument('--d_updates', default=5, type=int, help='Number of D updates per G update') # D更新次数
 parser.add_argument('--gp_weight', default=10, type=float, help='Gradient penalty weight') # GP权重
 parser.add_argument('--adversarial_weight', default=1e-3, type=float, help='Adversarial loss weight for G') # G对抗损失权重
@@ -221,8 +221,8 @@ if __name__ == '__main__':
 
 
         # 保存模型参数
-        torch.save(netG.state_dict(), f'epochs/netG_epoch_{UPSCALE_FACTOR}_{epoch:03d}.pth')
-        torch.save(netD.state_dict(), f'epochs/netD_epoch_{UPSCALE_FACTOR}_{epoch:03d}.pth')
+        torch.save(netG.state_dict(), f'epochs/netG_epoch_{UPSCALE_FACTOR}_{epoch:d}.pth')
+        torch.save(netD.state_dict(), f'epochs/netD_epoch_{UPSCALE_FACTOR}_{epoch:d}.pth')
 
         # 记录统计数据
         results['d_loss'].append(running_results['d_loss'] / (running_results['batch_sizes'] * D_UPDATES))
@@ -245,7 +245,7 @@ if __name__ == '__main__':
                       'PSNR': results['psnr'],
                       'SSIM': results['ssim']},
                 index=range(1, epoch + 1))
-            data_frame.to_csv(os.path.join(out_stats_path, f'srf_{UPSCALE_FACTOR}_train_results_epoch_{epoch:03d}.csv'), index_label='Epoch')
+            data_frame.to_csv(os.path.join(out_stats_path, f'srf_{UPSCALE_FACTOR}_train_results_epoch_{epoch:d}.csv'), index_label='Epoch')
 
     # 训练结束后保存最终的统计数据
     final_stats_path = 'statistics/'
