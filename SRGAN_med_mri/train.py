@@ -17,7 +17,7 @@ from model import Generator, Discriminator # 导入修改后的 Discriminator
 
 parser = argparse.ArgumentParser(description='Train Super Resolution Models with MedSRGAN-style Discriminator')
 parser.add_argument('--crop_size', default=96, type=int, help='training images crop size (HR)')
-parser.add_argument('--upscale_factor', default=2, type=int, choices=[2, 4, 8],
+parser.add_argument('--upscale_factor', default=4, type=int, choices=[2, 4, 8],
                     help='super resolution upscale factor')
 parser.add_argument('--num_epochs', default=100, type=int, help='train epoch number')
 parser.add_argument('--d_updates', default=5, type=int, help='Number of D updates per G update') # D更新次数
