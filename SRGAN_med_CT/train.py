@@ -200,24 +200,24 @@ if __name__ == '__main__':
                                    display_transform()(sr_cpu)])
 
             # 保存验证图像网格
-            if val_images: # 确保 val_images 不为空
-                val_images = torch.stack(val_images)
-                num_val_samples = len(val_loader)
-                grid_size = min(num_val_samples * 3, 15) # 最多显示 15 张图 (5组 LR/HR/SR)
-                val_images = torch.chunk(val_images, max(1, val_images.size(0) // grid_size)) # 分块防止显存不足
+            # if val_images: # 确保 val_images 不为空
+            #     val_images = torch.stack(val_images)
+            #     num_val_samples = len(val_loader)
+            #     grid_size = min(num_val_samples * 3, 15) # 最多显示 15 张图 (5组 LR/HR/SR)
+            #     val_images = torch.chunk(val_images, max(1, val_images.size(0) // grid_size)) # 分块防止显存不足
 
-                val_save_bar = tqdm(val_images, desc='[Saving Validation Results]')
-                index = 1
-                for image_chunk in val_save_bar:
-                    # 确保 image_chunk 包含 3 的倍数张图像
-                    if image_chunk.size(0) % 3 != 0:
-                        image_chunk = image_chunk[:-(image_chunk.size(0) % 3)] # 丢弃末尾不足一组的图像
-                    if image_chunk.size(0) > 0:
-                        image = utils.make_grid(image_chunk, nrow=3, padding=5)
-                        utils.save_image(image, os.path.join(out_path, f'epoch_{epoch:03d}_index_{index:02d}.png'), padding=5)
-                        index += 1
-            else:
-                print("No validation images generated.")
+            #     val_save_bar = tqdm(val_images, desc='[Saving Validation Results]')
+            #     index = 1
+            #     for image_chunk in val_save_bar:
+            #         # 确保 image_chunk 包含 3 的倍数张图像
+            #         if image_chunk.size(0) % 3 != 0:
+            #             image_chunk = image_chunk[:-(image_chunk.size(0) % 3)] # 丢弃末尾不足一组的图像
+            #         if image_chunk.size(0) > 0:
+            #             image = utils.make_grid(image_chunk, nrow=3, padding=5)
+            #             utils.save_image(image, os.path.join(out_path, f'epoch_{epoch:03d}_index_{index:02d}.png'), padding=5)
+            #             index += 1
+            # else:
+            #     print("No validation images generated.")
 
 
         # 保存模型参数
