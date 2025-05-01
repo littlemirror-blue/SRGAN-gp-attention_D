@@ -29,14 +29,14 @@ def extract_key(image_name):
 
 def main():
     parser = argparse.ArgumentParser(description='Test Benchmark Datasets')
-    # 放大修改为默认为2
-    parser.add_argument('--upscale_factor', default=2, type=int, help='super resolution upscale factor')
+    # 放大修改为默认为8
+    parser.add_argument('--upscale_factor', default=8, type=int, help='super resolution upscale factor')
     # 默认修改为epoch_2_98.pth(G为生成器,D为判别器(只在训练时使用))
-    parser.add_argument('--model_name', default='netG_epoch_2_98.pth', type=str, help='generator model epoch name')
-    # 默认修改为epoch_4_65.pth(G为生成器,D为判别器(只在训练时使用))
-    #parser.add_argument('--model_name', default='netG_epoch_4_65.pth', type=str, help='generator model epoch name')
-    # 尝试修改为epoch_8_41.pth(G为生成器,D为判别器(只在训练时使用))
-    #parser.add_argument('--model_name', default='netG_epoch_8_41.pth', type=str, help='generator model epoch name')
+    #parser.add_argument('--model_name', default='netG_epoch_2_99.pth', type=str, help='generator model epoch name')
+    # 默认修改为epoch_4_56.pth(G为生成器,D为判别器(只在训练时使用))
+    #parser.add_argument('--model_name', default='netG_epoch_4_56.pth', type=str, help='generator model epoch name')
+    # 尝试修改为epoch_8_72.pth(G为生成器,D为判别器(只在训练时使用))
+    parser.add_argument('--model_name', default='netG_epoch_8_72.pth', type=str, help='generator model epoch name')
     opt = parser.parse_args()
     UPSCALE_FACTOR = opt.upscale_factor
     MODEL_NAME = opt.model_name
